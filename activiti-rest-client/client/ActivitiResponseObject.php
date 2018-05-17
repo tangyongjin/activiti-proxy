@@ -21,10 +21,9 @@ class ActivitiResponseObject
 	{
 		$attributes = $this->getAttributes();
 
-		debug('属性:');
-		debug($json);
-		
-		debug($attributes);
+		// debug('属性:');
+		// debug($json);
+		// debug($attributes);
 
 		
 		foreach($attributes as $attributeName => $attributeType)

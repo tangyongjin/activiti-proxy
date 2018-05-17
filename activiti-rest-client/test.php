@@ -13,6 +13,7 @@
 2.根据启动返回的流程ID查询任务ID
 	请求URL:http://119.254.119.57:8111/activiti-rest/service/runtime/tasks?candidateUser=user1&processInstanceId=3470（其中3470是启动时返回的ID）
 
+
 3.获取用户待办
     请求URL:http://119.254.119.57:8111/activiti-rest/service/runtime/tasks/3477    （3477是上一步返回的ID）
 	参数：
@@ -85,8 +86,7 @@ $activiti = new ActivitiClient();
 
 
 $activiti->setUrl('119.254.119.57','8111','http');
-
-$activiti->setCredentials('user1', '000000');
+$activiti->setCredentials('admin', 'test');
 
 $activiti->setDebug(false);
 
@@ -128,8 +128,12 @@ $variables = array();
 
 
 
+$activiti_user1 = new ActivitiClient();
+$activiti_user1->setUrl('119.254.119.57','8111','http');
+$activiti_user1->setCredentials('user1', '000000');
 
-$response = $activiti->processInstances->startProcessInstance($processDefinitionId, $businessKey,$variables,$processDefinitionKey,$tenantId,
+
+$response = $activiti_user1->processInstances->startProcessInstance($processDefinitionId, $businessKey,$variables,$processDefinitionKey,$tenantId,
 	$message);
 
 
@@ -137,15 +141,23 @@ $response = $activiti->processInstances->startProcessInstance($processDefinition
 // echo "<pre>Return:";
 
 // print_r($response);
-echo "得到 instacne_id:" ;
+// echo "得到 instacne_id:" ;
 
 $instacne_id = $response->getId() ;
 
+debug("得到 instacne_id:".$instacne_id) ;
 
 
-$resp=$activiti->tasks->listOfTasksByProcessInstanceId($instacne_id);
+$resp=$activiti_user1->tasks->listOfTasksByProcessInstanceId($instacne_id);
 
-print_r($resp);
+$data=$resp->getData();
+
+debug(  $data[0]);
+
+debug(  $data[0]->getId() );
+
+
+// debug($resp->data);
 
 // print_r(  $instacne_id );
 

@@ -103,6 +103,7 @@ abstract class ActivitiClientBase
 			"Accept: application/json",
 			"Content-type: application/json",
 		);
+		
 		curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
 		
 		switch($method)

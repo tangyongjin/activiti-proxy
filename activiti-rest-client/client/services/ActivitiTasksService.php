@@ -110,7 +110,7 @@ class ActivitiTasksService extends ActivitiService
 	{
 		$data = array();
 		
-		return $this->client->request("runtime/tasks/$taskId", 'POST', $data, array(200), array(400 => "When the body contains an invalid value or when the assignee is missing when the action requires it.",404 => "Indicates the requested task was not found."));
+		return $this->client->request("runtime/tasks/$taskId", 'POST', $data, array(200), array(400 => "When the body contains an invalid value or when the assignee is missing when the action requires it.",404 => "Indicates the requested task was not found.",409=>"Indicates the action cannot be performed due to a conflict. Either the task was updates simultaneously or the task was claimed by another user, in case of the claim action."));
 	}
 	
 	/**
