@@ -103,7 +103,7 @@ abstract class ActivitiClientBase
 			"Accept: application/json",
 			"Content-type: application/json",
 		);
-		
+
 		curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
 		
 		switch($method)
@@ -270,7 +270,10 @@ abstract class ActivitiClientBase
 
 		if(isset($errorHttpCodes[$status]))
 		{
+	
 			throw new ActivitiClientException("状态 [$status], URL [$url]: " . $errorHttpCodes[$status], ActivitiClientException::INVALID_HTTP_CODE);
+	
+
 		}
 
 		if(ActivitiResponseType::isExpectedCode($status))

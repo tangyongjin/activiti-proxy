@@ -18,7 +18,7 @@ class ActivitiQueryProcessInstancesResponseData extends ActivitiResponseObject
 			'suspended' => 'boolean',
 			'processDefinitionUrl' => 'string',
 			'activityId' => 'string',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

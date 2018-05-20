@@ -23,7 +23,7 @@ class ActivitiGetListOfModelsResponseData extends ActivitiResponseObject
 			'createTime' => 'string',
 			'lastUpdateTime' => 'string',
 			'deploymentUrl' => 'string',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

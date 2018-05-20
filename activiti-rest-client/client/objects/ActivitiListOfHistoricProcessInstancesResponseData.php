@@ -26,7 +26,7 @@ class ActivitiListOfHistoricProcessInstancesResponseData extends ActivitiRespons
 			'superProcessInstanceId' => 'string',
 			'url' => 'string',
 			'variables' => 'array<ActivitiListOfHistoricProcessInstancesResponseDataVariable>',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

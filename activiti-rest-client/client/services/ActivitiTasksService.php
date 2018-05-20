@@ -55,7 +55,15 @@ class ActivitiTasksService extends ActivitiService
 		return $this->client->request("runtime/tasks", 'GET', $data, array(200), array(400 => "Indicates a parameter was passed in the wrong format or that 'delegationState' has an invalid value (other than 'pending' and 'resolved'). The status-message contains additional information."), 'ActivitiListOfTasksResponse');
 	}
 	
+    
 
+    public function listOfTasksByArg($data)
+	{
+		// $data = array();
+		
+		return $this->client->request("runtime/tasks", 'GET', $data, array(200), array(400 => "Indicates a parameter was passed in the wrong format or that 'delegationState' has an invalid value (other than 'pending' and 'resolved'). The status-message contains additional information."), 'ActivitiListOfTasksResponse');
+	}
+	
     //?candidateUser=user1&processInstanceId
 
 	public function listOfTasksByProcessInstanceId($processInstanceId)
@@ -106,9 +114,9 @@ class ActivitiTasksService extends ActivitiService
 	 * 
 	 * @see {@link http://www.activiti.org/userguide/#N14A5B Task actions}
 	 */
-	public function taskActions($taskId)
+	public function taskActions($taskId, $data)
 	{
-		$data = array();
+		// $data = array();
 		
 		return $this->client->request("runtime/tasks/$taskId", 'POST', $data, array(200), array(400 => "When the body contains an invalid value or when the assignee is missing when the action requires it.",404 => "Indicates the requested task was not found.",409=>"Indicates the action cannot be performed due to a conflict. Either the task was updates simultaneously or the task was claimed by another user, in case of the claim action."));
 	}

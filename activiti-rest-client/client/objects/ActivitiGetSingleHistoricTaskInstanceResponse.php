@@ -35,7 +35,7 @@ class ActivitiGetSingleHistoricTaskInstanceResponse extends ActivitiResponseObje
 			'parentTaskId' => '',
 			'url' => 'string',
 			'variables' => '',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

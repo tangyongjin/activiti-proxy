@@ -37,7 +37,7 @@ class ActivitiGetHistoricTaskInstancesResponseData extends ActivitiResponseObjec
 			'url' => 'string',
 			'taskVariables' => 'array<ActivitiGetHistoricTaskInstancesResponseDataTaskVariable>',
 			'processVariables' => 'array<ActivitiGetHistoricTaskInstancesResponseDataProcessVariable>',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

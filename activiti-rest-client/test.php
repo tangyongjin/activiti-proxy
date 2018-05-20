@@ -15,7 +15,7 @@
 
 
 3.获取用户待办
-    请求URL:http://119.254.119.57:8111/activiti-rest/service/runtime/tasks/3477    （3477是上一步返回的ID）
+    请求URL: http://119.254.119.57:8111/activiti-rest/service/runtime/tasks/3477    （3477是上一步返回的ID）
 	参数：
 		{
 			"action": "claim",
@@ -86,95 +86,148 @@ $activiti = new ActivitiClient();
 
 
 $activiti->setUrl('119.254.119.57','8111','http');
-$activiti->setCredentials('admin', 'test');
+$activiti->setCredentials('user1', '000000');
 
 $activiti->setDebug(false);
 
-
+/*
+        $this->deployment = new ActivitiDeploymentService($this);
+		$this->processDefinitions = new ActivitiProcessDefinitionsService($this);
+		$this->models = new ActivitiModelsService($this);
+		$this->processInstances = new ActivitiProcessInstancesService($this);
+		$this->executions = new ActivitiExecutionsService($this);
+		$this->tasks = new ActivitiTasksService($this);
+		$this->history = new ActivitiHistoryService($this);
+		$this->forms = new ActivitiFormsService($this);
+		$this->databaseTables = new ActivitiDatabaseTablesService($this);
+		$this->engine = new ActivitiEngineService($this);
+		$this->runtime = new ActivitiRuntimeService($this);
+		$this->jobs = new ActivitiJobsService($this);
+		$this->users = new ActivitiUsersService($this);
+		$this->groups = new ActivitiGroupsService($this);
+*/
 
  
 
-$processDefinitionId = 'order:4:58';
+$processDefinitionId = null;
 $businessKey = null;
 $message = null;
 $tenantId = null;
 
-$processDefinitionKey =null ;
+$processDefinitionKey ='order' ;
 
 $variables = array();
 
-// $endPoint = new ActivitiStartProcessInstanceRequestVariable();
-// $endPoint->setName('task_serial_no');
-// $endPoint->setValue('7L7663WPX8QMN');
-// $variables[] = $endPoint;
-
-// $partnerId = new ActivitiStartProcessInstanceRequestVariable();
-// $partnerId->setName('auto');
-// $partnerId->setValue('y');
-// $variables[] = $partnerId;
-        
-// $adminSecret = new ActivitiStartProcessInstanceRequestVariable();
-// $adminSecret->setName('money');
-// $adminSecret->setValue(11);
-// $variables[] = $adminSecret;
-        
  
-        
-// $entryName = new ActivitiStartProcessInstanceRequestVariable();
-// $entryName->setName('groupId');
-// $entryName->setValue('1');
-// $variables[] = $entryName;
 
-
-
-
-$activiti_user1 = new ActivitiClient();
-$activiti_user1->setUrl('119.254.119.57','8111','http');
-$activiti_user1->setCredentials('user1', '000000');
-
-
-$response = $activiti_user1->processInstances->startProcessInstance($processDefinitionId, $businessKey,$variables,$processDefinitionKey,$tenantId,
+$response = $activiti->processInstances->startProcessInstance($processDefinitionId, $businessKey,$variables,$processDefinitionKey,$tenantId,
 	$message);
 
 
-
-// echo "<pre>Return:";
-
-// print_r($response);
-// echo "得到 instacne_id:" ;
 
 $instacne_id = $response->getId() ;
 
 debug("得到 instacne_id:".$instacne_id) ;
 
 
-$resp=$activiti_user1->tasks->listOfTasksByProcessInstanceId($instacne_id);
+$resp=$activiti->tasks->listOfTasksByProcessInstanceId($instacne_id);
 
-$data=$resp->getData();
+$return=$resp->getData();
 
-debug(  $data[0]);
+debug(  $return[0]);
 
-debug(  $data[0]->getId() );
+$taskId=$return[0]->getId();
 
-
-// debug($resp->data);
-
-// print_r(  $instacne_id );
+debug(  $taskId);
 
 
 
-// echo "</pre>";
+$action=array("action"=>"claim","assignee"=>"user1");
+// {
+//   "action" : "claim",
+//   "assignee" : "userWhoClaims"
+// }
+
+$resp=$activiti->tasks->taskActions($taskId,$action);
+debug( $resp);
 
 
 
 
-// echo "查询? instacne_id ";
-// $task_ret= $activiti->runtime->getTask( $instacne_id); 
+
+$formdata=array(
+    array('name'=>'uName','type'=>'string','value'=>'89900'),
+    array('name'=>'auto','type'=>'string','value'=>'VVV'),
+	array('name'=>'isNetWork','type'=>'string','value'=>'网络'),
+    array('name'=>'money','type'=>'integer','value'=>199),
+	array('name'=>'groupId','type'=>'string','value'=>'3') 
+	
+);
+
+$action=array("action"=>"complete","assignee"=>"user1",'variables'=>$formdata);
+
+
+$resp=$activiti->tasks->taskActions($taskId,$action);
+debug( $resp);
 
 
 
-// $png=  $activiti->processInstances->getDiagramForProcessInstance(3528);
+ $arr=array('candidateUser'=>'crm1');
 
-// print_r($task_ret ) ;
+$resp=$activiti->tasks->listOfTasksByArg($arr);
+debug( $resp);
+
+
+
+
+
+$query=array( 
+	array('name'=>'uName','type'=>'string','value'=>'19841989',  "operation" => "equals")
+    );
+
+
+
+$queryRet=$activiti->processInstances->queryProcessInstances('order',$query);
+
+debug( $queryRet);
+
+//listOfTasksByArg
+
+
+
+	// public function queryProcessInstances($processDefinitionKey = null, $variables = null)
+	// {
+	// 	$data = array();
+	// 	if(!is_null($processDefinitionKey))
+	// 		$data['processDefinitionKey'] = $processDefinitionKey;
+	// 	if(!is_null($variables))
+	// 		$data['variables'] = $variables;
+		
+	// 	return $this->client->request("query/process-instances", 'POST', $data, array(200), array(400 => "Indicates a parameter was passed in the wrong format . The status-message contains additional information."), 'ActivitiQueryProcessInstancesResponse');
+	// }
+
+
+
+/*
+
+POST query/process-instances
+
+
+{
+  "processDefinitionKey":"order",
+  "variables":
+  [
+    {
+        "name" : "myVariable",
+        "value" : 1234,
+        "operation" : "equals",
+        "type" : "long"
+    }
+  ]
+}
+*/
+
+
+?>
 
 

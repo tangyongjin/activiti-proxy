@@ -20,7 +20,7 @@ class ActivitiListOfExecutionsResponseData extends ActivitiResponseObject
 			'processInstanceUrl' => 'string',
 			'suspended' => 'boolean',
 			'activityId' => '',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

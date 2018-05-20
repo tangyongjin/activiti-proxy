@@ -27,7 +27,7 @@ class ActivitiGetHistoricActivityInstancesResponseData extends ActivitiResponseO
 			'startTime' => 'string',
 			'endTime' => 'string',
 			'durationInMillis' => 'int',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

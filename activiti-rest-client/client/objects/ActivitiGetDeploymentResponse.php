@@ -17,7 +17,7 @@ class ActivitiGetDeploymentResponse extends ActivitiResponseObject
 			'deploymentTime' => 'string',
 			'category' => 'string',
 			'url' => 'string',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

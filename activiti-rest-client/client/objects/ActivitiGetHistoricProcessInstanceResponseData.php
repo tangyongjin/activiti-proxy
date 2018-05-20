@@ -26,7 +26,7 @@ class ActivitiGetHistoricProcessInstanceResponseData extends ActivitiResponseObj
 			'superProcessInstanceId' => 'string',
 			'url' => 'string',
 			'variables' => '',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	

@@ -23,7 +23,7 @@ class ActivitiGetSingleJobResponse extends ActivitiResponseObject
 			'retries' => 'int',
 			'exceptionMessage' => '',
 			'dueDate' => 'string',
-			'tenantId' => '',
+			'tenantId' => 'string',
 		));
 	}
 	
