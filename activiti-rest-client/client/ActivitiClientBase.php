@@ -126,7 +126,7 @@ abstract class ActivitiClientBase
 				{					
 					$content = json_encode($data);
 				    debug('POST参数:');
-					debug($content);
+					debug($data);
 
 					curl_setopt($c, CURLOPT_POSTFIELDS, $content);
 				}
@@ -140,7 +140,7 @@ abstract class ActivitiClientBase
 				{		
 					$content = json_encode($data);
 					debug('PUT参数:');
-				    debug($content);
+				    debug($data);
 //					curl_setopt($c, CURLOPT_POSTFIELDS, $content);
 				
 					$fileName = tempnam(sys_get_temp_dir(), 'activitiPut');
